@@ -1,3 +1,18 @@
-x = seno_agudo;
-b = x(end:-1:1);
-y = filter(b,1,saida_awgn_com_zeros_no_inicio);
+    
+
+    disp('começou.');
+    r = audiorecorder(fs, 24, 1);
+    record(r);
+    
+% for i=1:4
+    
+    pause(3);
+    
+    % p = play(r); 
+    myRecording = getaudiodata(r);
+    
+    plot(myRecording);
+    
+% end  
+
+stop(r);

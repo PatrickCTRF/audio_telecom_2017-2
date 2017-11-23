@@ -2,7 +2,7 @@
 
 string = 'aaaa';%APAGAR
 
-string = 'ab3.4cd3 5_ab3.4cd3 51,13-45_';%APAGAR
+string = 'ab3.4cd3 5_ab3.4cd3 51,13-45_ab3.4cd3 5_ab3.4cd3 51,13-45_';%APAGAR
 
 binario = atoi_bin(string);
 

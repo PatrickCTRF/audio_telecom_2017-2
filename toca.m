@@ -8,20 +8,26 @@ function [ saida ] = toca( input, ciclos_por_bit )
 
     angulo_tam1 = 0:resolucao_do_seno:(2*pi)*ciclos_por_bit;
     seno_grave = sin(angulo_tam1);
-    
 
     angulo_tam2 = 0:resolucao_do_seno*2:(2*pi)*2*ciclos_por_bit;
     seno_agudo = sin(angulo_tam2);
+
+    angulo_tam3 = 0:resolucao_do_seno*3:(2*pi)*3*ciclos_por_bit;
+    seno_inicio = sin(angulo_tam3);
+
+    angulo_tam4 = 0:resolucao_do_seno*0.5:(2*pi)*0.5*ciclos_por_bit;
+    seno_fim = sin(angulo_tam4);
     
     t_bit = length(seno_agudo)*ts;%seno_agudo ou seno_grave possuem o msm length().
 
     
-    saida = 0;
-    
-    saida = horzcat(saida, seno_agudo);
-    soundsc(seno_agudo, fs);
-    pause(t_bit);
-    
+      saida = 1;
+%     
+%     saida = horzcat(saida, seno_agudo);
+%     soundsc(seno_agudo, fs);
+%     pause(t_bit);
+%     
+%     saida = horzcat(saida, seno_inicio);
     
     for i=1:length(input)
         
@@ -37,6 +43,7 @@ function [ saida ] = toca( input, ciclos_por_bit )
         
     end
     
+%     saida = horzcat(saida, seno_fim);
     
 %     audiowrite('saida.wav',saida, fs);
     soundsc(saida, fs);

@@ -3,6 +3,7 @@ resolucao_do_seno = 0.1;
 fs = 96000;
 ts = 1/fs;
 
+ciclos_por_bit = 25;
 
 angulo_tam1 = 0:resolucao_do_seno:(2*pi)*ciclos_por_bit;
 seno_grave = sin(angulo_tam1);
@@ -16,39 +17,22 @@ t_bit = length(seno_agudo)*ts;%seno_agudo ou seno_grave possuem o msm length().
 disp('começou.');
 r = audiorecorder(fs, 24, 1);
 record(r);
-pause(20);
+pause(10);
 stop(r);
 % p = play(r); 
 myRecording = getaudiodata(r);
 
 
 disp('meio.');
-[resultado, indice] = cpu_produto_escalar_max(myRecording, senasso, 1);
-
-decodificado = [1];
-length_myRecording = length(myRecording);
-i = indice + length(seno_agudo);%se
 
 
-while i<
+y_0 = filtro_casado_matched_filter(myRecording, seno_grave);
+y_1 = filtro_casado_matched_filter(myRecording, seno_agudo);
 
-    [resultado3, indice3] = cpu_produto_escalar_max(myRecording(i:length_myRecording), senasso, 0);
+plot(quase_um_capacitor_media_atenua(abs(y_1)-abs(y_0), 200));
 
-    [resultado1, indice1] = cpu_produto_escalar_max(myRecording(i:length_myRecording), senao, 0);
+filtrado = quase_um_capacitor_media_atenua(abs(y_1)-abs(y_0), 200);
 
-    [resultado0, indice0] = cpu_produto_escalar_max(myRecording(i:length_myRecording), seninho, 0);
+indice_iniciou = find(filtrado > 5, 1 );%%Gravamos aqui onde a transmissão começou no topo do bit de início.
 
-    if resultado1 > resultado0
-
-        decodificado = horzcat(decodificado, 1);
-
-    else
-
-        decodificado = horzcat(decodificado, 0);
-
-    end
-
-    i = i + numero_de_amostras_por_ciclo_senao*25;
-
-end
-
+length(seno_agudo);
